@@ -5,30 +5,33 @@ import Calendar from './calendar.jsx';
 import Recommend from './recommend.jsx';
 import Search from './search.jsx';
 import Navigation from './navigation.jsx';
+import Login from './login.jsx'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      signedIn: false
     }
   }
   render() { 
-    return ( 
-
-      <Container>
-        <header>
-          <Row style={{marginTop: "50px", height: "100%"}}>
-            <Col sm={8}><Search /></Col>
-            <Col sm={4}><Navigation /></Col>
+    {return this.state.signedIn 
+      ? ( 
+        <Container>
+          <header>
+            <Row style={{marginTop: "50px", height: "100%"}}>
+              <Col sm={8}><Search /></Col>
+              <Col sm={4}><Navigation /></Col>
+            </Row>
+          </header>
+          <Row>
+            <Col sm={8}><Calendar /></Col>
+            <Col sm={4}><Recommend /></Col>
           </Row>
-        </header>
-        <Row>
-          <Col sm={8}><Calendar /></Col>
-          <Col sm={4}><Recommend /></Col>
-        </Row>
-      </Container>
-     );
+        </Container>
+       )
+      : <Login />
+    }
   }
 }
  
