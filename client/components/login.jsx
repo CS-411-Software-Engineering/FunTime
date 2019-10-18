@@ -8,7 +8,7 @@ const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v
 
 // Authorization scopes required by the API; multiple scopes can be
 // included, separated by spaces.
-const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+const SCOPES = "https://www.googleapis.com/auth/calendar";
 
 
 class Login extends Component {
@@ -128,7 +128,8 @@ class Login extends Component {
   render() { 
     return ( 
       <>
-        {this.state.signInToggle ? <button id="authorize_button" onClick= {this.handleAuthClick}>Authorize</button> : null} 
+        {/* <div className="g-signin2" onClick= {this.handleAuthClick}></div> */}
+        {this.state.signInToggle ? (<button onClick= {this.handleAuthClick}>Sign in with Google</button>) : null} 
         {this.state.signOutToggle ? <button id="signout_button" onClick= {this.handleSignoutClick}>Sign Out</button> : null} 
         <pre id="content" style={{'whiteSpace': 'pre-wrap'}}></pre>
       </>
