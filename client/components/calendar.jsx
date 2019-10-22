@@ -8,7 +8,9 @@ class Calendar extends Component {
   render() { 
     return ( 
       <div style={{border: "1px solid black"}}>
-        Calendar goes here
+        {this.props.events.map((event, index) => {
+          return <div key = {index}>{event.summary}</div>
+        })}
       </div>
      );
   }
