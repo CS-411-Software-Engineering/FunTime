@@ -36,11 +36,11 @@ class App extends Component {
           <header>
             <Row style={{marginTop: "50px", height: "100%"}}>
               <Col sm={8}><Search /></Col>
-              <Col sm={4}><Navigation /></Col>
+              <Col sm={4}><Navigation logOut={this.logOut} /></Col>
             </Row>
           </header>
           <Row>
-            <Col sm={8}><Calendar events = {this.state.events}/></Col>
+            <Col sm={8}><Calendar events = {this.state.events} /></Col>
             <Col sm={4}><Recommend /></Col>
           </Row>
         </Container>
