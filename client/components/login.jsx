@@ -31,7 +31,7 @@ class Login extends Component {
     this.handleClientLoad();
   }
   
-  listUpcomingEvents(appendPre) {
+  listUpcomingEvents(appendPre, logIn) {
     console.log('getting events');
     window.gapi.client.calendar.events.list({
       'calendarId': 'primary',
@@ -41,22 +41,22 @@ class Login extends Component {
       'maxResults': 10,
       'orderBy': 'startTime'
     }).then(function(response) {
-      var events = response.result.items;
+      const events = response.result.items;
       console.log('events', events);
-      appendPre('Upcoming events:');
-
-      if (events.length > 0) {
-        for (let i = 0; i < events.length; i++) {
-          var event = events[i];
-          var when = event.start.dateTime;
-          if (!when) {
-            when = event.start.date;
-          }
-          appendPre(event.summary + ' (' + when + ')')
-        }
-      } else {
-        appendPre('No upcoming events found.');
-      }
+      // appendPre('Upcoming events:');
+      logIn({ events })
+      // if (events.length > 0) {
+      //   for (let i = 0; i < events.length; i++) {
+      //     var event = events[i];
+      //     var when = event.start.dateTime;
+      //     if (!when) {
+      //       when = event.start.date;
+      //     }
+      //     appendPre(event.summary + ' (' + when + ')')
+      //   }
+      // } else {
+      //   appendPre('No upcoming events found.');
+      // }
     });
   }
   
@@ -67,7 +67,7 @@ class Login extends Component {
         signInToggle: false,
         signOutToggle: true
       })
-      this.listUpcomingEvents(this.appendPre);
+      this.listUpcomingEvents(this.appendPre, this.props.logIn);
     } else {
       this.setState({
         signInToggle: true,

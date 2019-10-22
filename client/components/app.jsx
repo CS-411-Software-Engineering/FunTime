@@ -11,9 +11,24 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signedIn: false
+      signedIn: false,
+      events: []
     }
+    this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
+
+  logIn(data) {
+    let events = data.events
+    console.log('events:', events)
+    this.setState({signedIn: true, events})
+  }
+
+  logOut() {
+    this.setState({signedIn: false})
+  }
+  
+
   render() { 
     {return this.state.signedIn 
       ? ( 
@@ -25,12 +40,12 @@ class App extends Component {
             </Row>
           </header>
           <Row>
-            <Col sm={8}><Calendar /></Col>
+            <Col sm={8}><Calendar events = {this.state.events}/></Col>
             <Col sm={4}><Recommend /></Col>
           </Row>
         </Container>
        )
-      : <Login />
+      : <Login logIn = { this.logIn } logOut = { this.logOut } />
     }
   }
 }
