@@ -4,7 +4,14 @@ class Navigation extends Component {
   constructor(props) {
     super(props);
     this.state = {  }
+    this.handleSignoutClick = this.handleSignoutClick.bind(this);
   }
+
+  handleSignoutClick(event) {
+    window.gapi.auth2.getAuthInstance().signOut();
+    this.props.logOut();
+  }
+
   render() { 
     return ( 
       <Nav variant="pills" defaultActiveKey="/home">
@@ -15,9 +22,7 @@ class Navigation extends Component {
           <Nav.Link eventKey="link-1">Option 2</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="disabled" disabled>
-            Disabled
-          </Nav.Link>
+          <button id="signout_button" onClick= {this.handleSignoutClick}>Sign Out</button>
         </Nav.Item>
       </Nav>
      );
