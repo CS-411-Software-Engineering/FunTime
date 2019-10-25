@@ -5,7 +5,7 @@ import Calendar from './calendar.jsx';
 import Recommend from './recommend.jsx';
 import Search from './search.jsx';
 import Navigation from './navigation.jsx';
-import Login from './login.jsx'
+import Login from './login.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class App extends Component {
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+
   }
 
   logIn(data) {
