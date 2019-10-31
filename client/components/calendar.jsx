@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import moment from 'moment';
+import moment, { calendarFormat } from 'moment';
 import {
   Calendar,
   momentLocalizer,
 } from 'react-big-calendar';
 require('react-big-calendar/lib/css/react-big-calendar.css');
+import '../../public/calendar.css'
 
 // import {Row, Col} from 'react-bootstrap';
 
@@ -26,12 +27,22 @@ class MyCalendar extends Component {
     this.setState({events});
   }
 
+
+
+
   render() {
     return ( 
 
       <div>
-        <Calendar localizer={localizer} events={this.state.events} defaultView='week'/>
+        <Calendar 
+          localizer={localizer} 
+          events={this.state.events} 
+          defaultView='week'
+          views = {['week']}
+          />
+
       </div>
+      
       // <div style={{border: "1px solid black"}}>
       //   {this.props.events.map((event, index) => {
       //     return <div key = {index}>
