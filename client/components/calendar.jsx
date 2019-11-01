@@ -5,7 +5,7 @@ import {
   momentLocalizer,
 } from 'react-big-calendar';
 require('react-big-calendar/lib/css/react-big-calendar.css');
-import '../../public/calendar.css'
+import './calendar.css'
 
 // import {Row, Col} from 'react-bootstrap';
 
