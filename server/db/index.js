@@ -15,3 +15,6 @@ const userSchema = new mongoose.Schema({
   location: String,
   Age: Number,
 })
+
+const User = mongoose.model('User', userSchema);
+
