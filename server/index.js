@@ -1,9 +1,13 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const userRoute = require('./routes/user');
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, '../public')));
+
+app.use('/user', userRoute);
+
 
 app.use((req, res) => {
   res.sendStatus(404);
