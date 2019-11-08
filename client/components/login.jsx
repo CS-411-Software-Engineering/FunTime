@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {CLIENT_ID, CLIENT_SECRET, API_KEY} from '../config.js';
 import './login.css';
+import axios from 'axios'
 
 // const CLIENT_ID = '<YOUR_CLIENT_ID>';
 // const API_KEY = '<YOUR_API_KEY>';
@@ -46,6 +47,7 @@ class Login extends Component {
       const events = response.result.items;
       console.log('events', events);
       // appendPre('Upcoming events:');
+      
       logIn({ events })
       // if (events.length > 0) {
       //   for (let i = 0; i < events.length; i++) {
