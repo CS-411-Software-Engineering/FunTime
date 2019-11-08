@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {CLIENT_ID, CLIENT_SECRET, API_KEY} from '../config.js';
+import './login.css';
+
 // const CLIENT_ID = '<YOUR_CLIENT_ID>';
 // const API_KEY = '<YOUR_API_KEY>';
 
@@ -127,12 +129,13 @@ class Login extends Component {
 
   render() { 
     return ( 
-      <>
+      <div className = 'login'>
+        <img src='/logo.jpg'/>
         {/* <div className="g-signin2" onClick= {this.handleAuthClick}></div> */}
-        {this.state.signInToggle ? (<button onClick= {this.handleAuthClick}>Sign in with Google</button>) : null} 
-        {this.state.signOutToggle ? <button id="signout_button" onClick= {this.handleSignoutClick}>Sign Out</button> : null} 
+        {this.state.signInToggle ? (<button className='login-signInButton' onClick= {this.handleAuthClick}>Sign in with Google</button>) : null} 
+        {/* {this.state.signOutToggle ? <button id="signout_button" onClick= {this.handleSignoutClick}>Sign Out</button> : null}  */}
         <pre id="content" style={{'whiteSpace': 'pre-wrap'}}></pre>
-      </>
+      </div>
      );
   }
 }
