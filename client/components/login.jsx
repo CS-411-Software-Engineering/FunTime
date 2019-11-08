@@ -47,8 +47,22 @@ class Login extends Component {
       const events = response.result.items;
       console.log('events', events);
       // appendPre('Upcoming events:');
-      
-      logIn({ events })
+      const profile = window.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
+      console.log('ID: ' + profile.getId());
+      console.log('Full Name: ' + profile.getName());
+      console.log('Given Name: ' + profile.getGivenName());
+      console.log('Family Name: ' + profile.getFamilyName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail());
+      const user = {
+        id: profile.getId(),
+        firstName: profile.getGivenName(),
+        lastName: profile.getFamilyName(),
+        imageUrl: profile.getImageUrl(),
+        email: profile.getEmail()
+      }
+      console.log('user in login:', user)
+      logIn({ events }, user)
       // if (events.length > 0) {
       //   for (let i = 0; i < events.length; i++) {
       //     var event = events[i];

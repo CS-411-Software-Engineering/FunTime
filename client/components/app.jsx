@@ -12,17 +12,19 @@ class App extends Component {
     super(props);
     this.state = {
       signedIn: false,
-      events: []
+      events: [],
+      user: {},
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
 
   }
 
-  logIn(data) {
+  logIn(data, user) {
     let events = data.events
     console.log('events:', events)
-    this.setState({signedIn: true, events})
+    console.log('user:', user);
+    this.setState({signedIn: true, events, user})
   }
 
   logOut() {
