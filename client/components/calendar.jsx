@@ -39,6 +39,7 @@ class MyCalendar extends Component {
           events={this.state.events} 
           defaultView='week'
           views = {['week']}
+          
           />
 
       </div>
