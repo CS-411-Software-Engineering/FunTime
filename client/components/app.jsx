@@ -47,9 +47,6 @@ class App extends Component {
             <Col sm={8}><Calendar events = {this.state.events} /></Col>
             <Col sm={4}><Recommend /></Col>
           </Row>
-          <div>
-            <PreferencesForm />
-          </div>
         </Container>
        )
       : <Login logIn = { this.logIn } logOut = { this.logOut } />
