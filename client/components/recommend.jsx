@@ -20,7 +20,7 @@ class Recommend extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
     this.handleNext = this.handleNext.bind(this);
-    let perPage = 3;
+    this.perPage = 3;
   }
 
   //When the user click the add bottom on the event, add this event to user's calender.
@@ -45,14 +45,14 @@ class Recommend extends Component {
   render() { 
     return ( 
       <div className = "recommend">
-        <Button variant="primary" size="lg" active onClick = {this.handlePrev}>
+        <Button variant="primary" size="lg" disabled={this.state.currPage === 0} onClick = {this.handlePrev}>
           PrevPage
         </Button>
         <div className="divider"/>
         <Button variant="primary" size="lg" active onClick = {this.handleNext}>
           NextPage
         </Button>
-        {this.state.events.slice(this.state.currPage*perPage,(this.state.currPage+1)*perPage+1).map((p)=> (<Recomm title = {p.title} time = {p.time} info = {p.info} img = {p.info} add={this.handleSubmit}/>))}
+        {this.state.events.slice(this.state.currPage*this.perPage,(this.state.currPage+1)*this.perPage).map((p)=> (<Recomm title = {p.title} time = {p.time} info = {p.info} img = {p.info} add={this.handleSubmit}/>))}
       </div>
     );
   }
