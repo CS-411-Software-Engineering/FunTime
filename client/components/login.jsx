@@ -57,19 +57,16 @@ class Login extends Component {
         email: profile.getEmail()
       }
       console.log('user in login:', user)
-      logIn({ events }, user)
-      // if (events.length > 0) {
-      //   for (let i = 0; i < events.length; i++) {
-      //     var event = events[i];
-      //     var when = event.start.dateTime;
-      //     if (!when) {
-      //       when = event.start.date;
-      //     }
-      //     appendPre(event.summary + ' (' + when + ')')
-      //   }
-      // } else {
-      //   appendPre('No upcoming events found.');
-      // }
+      axios.get(`/user/${user.email}`).then((result) => {
+        if(result.data.found) {
+          user.first = true;
+          logIn({ events }, user)
+        } else {
+          user.first = false;
+          logIn({ events }, user)
+        }
+      })
+
     });
   }
   

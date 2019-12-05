@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const DB = require('./config');
-mongoose.connect(`mongodb+srv://${DB.USER}:${DB.PASSWORD}@connect4-xkfvh.mongodb.net/test?retryWrites=true&w=majority`, {useUnifiedTopology: true, useNewUrlParser: true});
+mongoose.connect(`mongodb+srv://${DB.USER}:${DB.PASSWORD}@connect4-xkfvh.mongodb.net/funTime?retryWrites=true&w=majority`, {useUnifiedTopology: true, useNewUrlParser: true});
 
 
 const db = mongoose.connection;
@@ -18,4 +18,22 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = { User };
+
+const findUserByEmail = (email) => {
+  return new Promise((res, rej) => {
+    User.findOne({ email }, (err, result) => {
+      if(err) {
+        console.log("error finding user by email:", err);
+        rej(err);
+      } else {
+        res(result);
+      }
+    })
+  })
+}
+
+const createUser = (user) => {
+  User.create({})
+}
+
+module.exports = { findUserByEmail };

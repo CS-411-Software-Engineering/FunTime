@@ -24,6 +24,7 @@ class App extends Component {
     let events = data.events
     console.log('events:', events)
     console.log('user:', user);
+    
     this.setState({signedIn: true, events, user})
   }
 

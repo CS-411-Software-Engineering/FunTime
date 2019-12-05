@@ -7,7 +7,7 @@ router.get('/check', function(req, res, next) {
 });
 
 router.get('/:email', (req, res, next) => {
-  console.log(req.body)
+  console.log(req.body);
   console.log(req.params);
   res.send()
 })
