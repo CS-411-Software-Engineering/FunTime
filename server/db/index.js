@@ -34,7 +34,22 @@ const findUserByEmail = (email) => {
 }
 
 const createUser = (user) => {
-  User.create({})
+  return new Promise((res, rej)=> {
+    User.create({name: user.displayName, email: user.emails, pref: [], location: user.location})
+    .then((createdUser)=> {
+      res(createdUser)
+    })
+    .catch(err => {
+      console.log("Error creating user:", err);
+      rej(err)
+    })
+  })
 }
 
-module.exports = { findUserByEmail };
+const updateUserPref = (email, pref) => {
+  return new Promise((res, rej) => {
+    User.findOneAndUpdate
+  })
+}
+
+module.exports = { findUserByEmail, createUser };
