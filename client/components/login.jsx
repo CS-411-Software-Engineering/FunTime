@@ -41,19 +41,14 @@ class Login extends Component {
       'timeMin': (new Date()).toISOString(),
       'showDeleted': false,
       'singleEvents': true,
-      'maxResults': 10,
+      'maxResults': 30,
       'orderBy': 'startTime'
     }).then(function(response) {
       const events = response.result.items;
       console.log('events', events);
       // appendPre('Upcoming events:');
       const profile = window.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
-      console.log('ID: ' + profile.getId());
-      console.log('Full Name: ' + profile.getName());
-      console.log('Given Name: ' + profile.getGivenName());
-      console.log('Family Name: ' + profile.getFamilyName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail());
+
       const user = {
         id: profile.getId(),
         firstName: profile.getGivenName(),
