@@ -10,6 +10,7 @@ db.once('open', function() {
 });
 
 const userSchema = new mongoose.Schema({
+  name: String,
   email: String,
   pref: Array,
   location: String,
