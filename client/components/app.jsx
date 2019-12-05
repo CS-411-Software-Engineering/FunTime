@@ -6,6 +6,7 @@ import Recommend from './recommend.jsx';
 import Search from './search.jsx';
 import Navigation from './navigation.jsx';
 import Login from './login.jsx';
+import PreferencesForm from './preferencesForm.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -30,11 +31,11 @@ class App extends Component {
   logOut() {
     this.setState({signedIn: false})
   }
-  
 
-  render() { 
-    {return this.state.signedIn 
-      ? ( 
+
+  render() {
+    {return this.state.signedIn
+      ? (
         <Container>
           <header>
             <Row style={{marginTop: "50px", height: "100%"}}>
@@ -46,11 +47,14 @@ class App extends Component {
             <Col sm={8}><Calendar events = {this.state.events} /></Col>
             <Col sm={4}><Recommend /></Col>
           </Row>
+          <div>
+            <PreferencesForm />
+          </div>
         </Container>
        )
       : <Login logIn = { this.logIn } logOut = { this.logOut } />
     }
   }
 }
- 
+
 export default App;
