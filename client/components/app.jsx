@@ -42,7 +42,7 @@ class App extends Component {
     console.log(`Latitude : ${crd.latitude}`);
     console.log(`Longitude: ${crd.longitude}`);
     console.log(`More or less ${crd.accuracy} meters.`);
-    
+
     const updatedUserInfo = this.state.user;
     updatedUserInfo.location = [crd.latitude, crd.longitude];
     this.setState({user: updatedUserInfo});
@@ -88,7 +88,7 @@ class App extends Component {
           </header>
           <Row>
             <Col sm={8}><Calendar events = {this.state.events} /></Col>
-            <Col sm={4}><Recommend /></Col>
+            <Col sm={4}><Recommend location = {this.state.user.location} /></Col>
           </Row>
         </Container>
        )

@@ -23,6 +23,9 @@ class Recommend extends Component {
     this.perPage = 3;
   }
 
+  componentDidMount() {
+    this.handleNext();
+  }
   //When the user click the add bottom on the event, add this event to user's calender.
   handleSubmit(){
 
@@ -37,7 +40,15 @@ class Recommend extends Component {
   //load next page, get more recommendation.
   handleNext(){
     //increase current page num
-    this.setState((prevState)=>{return {currPage: prevState.currPage + 1}});
+    // axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&latlong=${this.props.location[0]},${this.props.location[1]}&apikey=FbaXAVqFDDUUKd927p9yMFZHEbBB5v9J&page=${this.state.currPage}&size=3`)
+    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&latlong=42.3510016,-71.1090176&apikey=FbaXAVqFDDUUKd927p9yMFZHEbBB5v9J&page=${this.state.currPage}&size=3`)
+    .then(result => {
+      console.log("recoomedation result", result);
+      const newEvent = result.data._embedded.events.map((event) => {
+        return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info} 
+      })
+      this.setState((prevState)=>{return {currPage: prevState.currPage + 1, events: newEvent}});
+    })
 
     //Get more recommendation.
   }
@@ -52,7 +63,7 @@ class Recommend extends Component {
         <Button variant="primary" size="lg" active onClick = {this.handleNext}>
           NextPage
         </Button>
-        {this.state.events.slice(this.state.currPage*this.perPage,(this.state.currPage+1)*this.perPage).map((p)=> (<Recomm title = {p.title} time = {p.time} info = {p.info} img = {p.info} add={this.handleSubmit}/>))}
+        {this.state.events.map((event)=> (<Recomm title = {event.title} time = {event.time} info = {event.info} img = {event.img} add={this.handleSubmit}/>))}
       </div>
     );
   }
