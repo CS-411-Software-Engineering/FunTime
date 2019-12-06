@@ -31,7 +31,7 @@ class Recommend extends Component {
     .then(result => {
       console.log("recoomedation result", result);
       const newEvent = result.data._embedded.events.map((event) => {
-        return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info} 
+        return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info, dateTime: event.dates.start.dateTime} 
       })
       this.setState((prevState)=>{return {events: newEvent}});
     })
@@ -46,7 +46,7 @@ class Recommend extends Component {
     .then(result => {
       console.log("recoomedation result", result);
       const newEvent = result.data._embedded.events.map((event) => {
-        return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info} 
+        return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info, dateTime: event.dates.start.dateTime} 
       })
       this.setState((prevState)=>{return {currPage: prevPage, events: newEvent}});
     })
@@ -60,7 +60,7 @@ class Recommend extends Component {
     .then(result => {
       console.log("recoomedation result", result);
       const newEvent = result.data._embedded.events.map((event) => {
-        return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info} 
+        return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info, dateTime: event.dates.start.dateTime} 
       })
       this.setState((prevState)=>{return {currPage: nextPage, events: newEvent}});
     })
@@ -86,7 +86,7 @@ class Recommend extends Component {
         <Button variant="design" size="lg" active onClick = {this.handleNext}>
           NextPage
         </Button>
-        {this.state.events.map((event)=> (<Recomm key={Math.random()} title = {event.title} time = {event.time} info = {event.info} img = {event.img} add={this.handleSubmit}/>))}
+        {this.state.events.map((event)=> (<Recomm key={Math.random()} title = {event.title} time = {event.time} dateTime = {event.dateTime} info = {event.info} img = {event.img} add={this.handleSubmit}/>))}
       </div>
     );
   }
