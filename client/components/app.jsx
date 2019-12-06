@@ -18,8 +18,43 @@ class App extends Component {
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
-
+    this.geoLocationSuccess = this.geoLocationSuccess.bind(this);
+    this.success = this.success.bind(this);
   }
+
+  componentDidMount() {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+    
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }  
+      navigator.geolocation.getCurrentPosition(this.success, error, options);
+  }
+
+  success(pos) {
+    const crd = pos.coords;
+  
+    console.log('Your current position is:');
+    console.log(`Latitude : ${crd.latitude}`);
+    console.log(`Longitude: ${crd.longitude}`);
+    console.log(`More or less ${crd.accuracy} meters.`);
+    
+    const updatedUserInfo = this.state.user;
+    updatedUserInfo.location = [crd.latitude, crd.longitude];
+    this.setState({user: updatedUserInfo});
+  }
+
+  geoLocationSuccess(location) {
+    console.log("Location:", location);
+    const updatedUserInfo = this.state.user;
+    updatedUserInfo.location = location
+    this.setState({ user: updatedUserInfo});
+  }
+
 
   logIn(data, user) {
     let events = data.events
