@@ -11,11 +11,14 @@ class Recomm extends Component{
     add(){
         
         var start = this.props.dateTime;
-        var localDate = new Date(start);
-        localDate.setHours(localDate.getHours() + 2);
-        var end = localDate.toISOString();
-        // console.log(end)
-        // console.log(start)
+        console.log('start', start)
+        var local = new Date(start);
+        console.log('local', local)
+        local.setHours(local.getHours() + 2);
+        console.log('local', local)
+        var end = local.toISOString();
+        console.log('end time', end)
+        console.log(start)
         var event = {
             'summary': this.props.title,
             'start': {

@@ -60,13 +60,14 @@ class Search extends Component {
         // })
         // console.log('result',result)
         const newEvent = result._embedded.events.map((event) => {
-          return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info} 
+          return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info, dateTime: event.dates.start.dateTime} 
         })
         this.setState({results: newEvent, 
           haveResult:true, 
           showModal:true});
         // this.state.haveResult = true
         // this.state.showModal = true
+        console.log('time from', this.state.results[0].dateTime)
         console.log(newEvent)
         
         // console.log('eventArray', eventArray)
@@ -103,8 +104,7 @@ class Search extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {this.state.results.map((event)=> (<Recomm key={Math.random()} title = {event.title} time = {event.time} info = {event.info} img = {event.img} add={this.handleSubmit}/>))}
-
+            {this.state.results.map((event)=> (<Recomm key={Math.random()} title = {event.title} time = {event.time}  dateTime = {event.dateTime} info = {event.info} img = {event.img}/>))}
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.onHide}>Close</Button>
