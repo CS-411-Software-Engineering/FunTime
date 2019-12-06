@@ -27,7 +27,7 @@ class Recommend extends Component {
   }
 
   init() {
-    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&latlong=${this.props.location[0]},${this.props.location[1]}&apikey=FbaXAVqFDDUUKd927p9yMFZHEbBB5v9J&page=${this.state.currPage}&size=3`)
+    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=[${this.props.pref[0]},${this.props.pref[1]},${this.props.pref[2]}]&latlong=${this.props.location[0]},${this.props.location[1]}&apikey=FbaXAVqFDDUUKd927p9yMFZHEbBB5v9J&page=${this.state.currPage}&size=3`)
     .then(result => {
       console.log("recoomedation result", result);
       const newEvent = result.data._embedded.events.map((event) => {
@@ -42,7 +42,7 @@ class Recommend extends Component {
   handlePrev(){
     //decrease current page num
     const prevPage = this.state.currPage - 1;
-    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&latlong=${this.props.location[0]},${this.props.location[1]}&apikey=FbaXAVqFDDUUKd927p9yMFZHEbBB5v9J&page=${prevPage}&size=3`)
+    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=[${this.props.pref[0]},${this.props.pref[1]},${this.props.pref[2]}]&latlong=${this.props.location[0]},${this.props.location[1]}&apikey=FbaXAVqFDDUUKd927p9yMFZHEbBB5v9J&page=${prevPage}&size=3`)
     .then(result => {
       console.log("recoomedation result", result);
       const newEvent = result.data._embedded.events.map((event) => {
@@ -56,7 +56,7 @@ class Recommend extends Component {
   handleNext(){
     //increase current page num
     const nextPage = this.state.currPage + 1;
-    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&latlong=${this.props.location[0]},${this.props.location[1]}&apikey=FbaXAVqFDDUUKd927p9yMFZHEbBB5v9J&page=${nextPage}&size=3`)
+    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=[${this.props.pref[0]},${this.props.pref[1]},${this.props.pref[2]}]&latlong=${this.props.location[0]},${this.props.location[1]}&apikey=FbaXAVqFDDUUKd927p9yMFZHEbBB5v9J&page=${nextPage}&size=3`)
     .then(result => {
       console.log("recoomedation result", result);
       const newEvent = result.data._embedded.events.map((event) => {

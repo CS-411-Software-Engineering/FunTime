@@ -5,6 +5,7 @@ import Recommend from './recommend.jsx';
 import Search from './search.jsx';
 import Navigation from './navigation.jsx';
 import Login from './login.jsx';
+import PreferencesForm from './preferencesForm.jsx';
 import axios from 'axios';
 
 class App extends Component {
@@ -14,9 +15,11 @@ class App extends Component {
       signedIn: false,
       events: [],
       user: {},
+      first: true
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.updateUserPref = this.updateUserPref.bind(this);
     this.success = this.success.bind(this);
   }
 
@@ -44,29 +47,41 @@ class App extends Component {
         user.first = true;
       } else {
         user.first = false;
+        
       }
+      axios.get(`/user/preference/${user.email}`)
+        .then((preferences) => {
+          console.log("PREFERENCES:", preferences);
+          user.pref = preferences.data.pref;
+          this.setState({signedIn: true, events, user}, () => {
+    
+            const options = {
+              enableHighAccuracy: true,
+              timeout: 5000,
+              maximumAge: 0
+            };
+    
+            function error(err) {
+              console.warn(`ERROR(${err.code}): ${err.message}`);
+            };
+    
+            navigator.geolocation.getCurrentPosition(this.success, error, options);
+          })
+        })
       
-      this.setState({signedIn: true, events, user}, () => {
-
-        const options = {
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 0
-        };
-
-        function error(err) {
-          console.warn(`ERROR(${err.code}): ${err.message}`);
-        };
-
-        navigator.geolocation.getCurrentPosition(this.success, error, options);
-      })
     })
   }
 
   logOut() {
     this.setState({signedIn: false})
   }
-  
+
+  updateUserPref(pref = []) {
+    const updatedUser = this.state.user;
+    updatedUser.pref = pref;
+    this.setState({user: updatedUser});
+  }
+
 
   render() { 
     {return this.state.signedIn 
@@ -75,13 +90,13 @@ class App extends Component {
           <header>
             <Row style={{marginTop: "50px", height: "100%"}}>
               <Col sm={8}><Search /></Col>
-              <Col sm={4}><Navigation logOut={this.logOut} user = {this.state.user} /></Col>
+              <Col sm={4}><Navigation logOut={this.logOut} user = {this.state.user} updateUserPref = {this.updateUserPref} /></Col>
             </Row>
           </header>
           <Row>
-            <Col sm={8}><Calendar events = {this.state.events} /></Col>
+            <Col sm={8}><Calendar events = {this.state.events} user = {this.state.user} updateUserPref = {this.updateUserPref} /></Col>
             {this.state.user.location 
-              ? <Col sm={4}><Recommend location = {this.state.user.location} /></Col>
+              ? <Col sm={4}><Recommend location = {this.state.user.location} pref = {this.state.user.pref}/></Col>
               : (<>
                   <Spinner animation="grow" variant="success" />
                   <Spinner animation="grow" variant="danger" />
@@ -94,5 +109,5 @@ class App extends Component {
     }
   }
 }
- 
+
 export default App;
