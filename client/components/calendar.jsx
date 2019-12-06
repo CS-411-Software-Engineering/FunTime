@@ -9,9 +9,17 @@ import './calendar.css'
 import PreferencesForm from './preferencesForm.jsx';
 import { Modal, Button } from 'react-bootstrap';
 
-// import {Row, Col} from 'react-bootstrap';
+// Calendar weekly view start with today
+var d = new Date();
+var n = d.getDay();
+moment.locale('en',{
+  week:{
+    dow : n
+  }
+});
 
 const localizer = momentLocalizer(moment);
+
 
 class MyCalendar extends Component {
   constructor(props) {

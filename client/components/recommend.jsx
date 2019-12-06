@@ -10,34 +10,60 @@ class Recommend extends Component {
     super(props);
     this.state = {
       currPage: 0,
-      events:[
-      {title:"FunTime1", time:"11:00AM- 12:00PM", info:"Come and have fun!", img:"holder.js/100px180"},
-      {title:"FunTime1", time:"11:00AM- 12:00PM", info:"Come and have fun!", img:"holder.js/100px180"},
-      {title:"FunTime1", time:"11:00AM- 12:00PM", info:"Come and have fun!", img:"holder.js/100px180"},
-      {title:"FunTime1", time:"11:00AM- 12:00PM", info:"Come and have fun!", img:"holder.js/100px180"},
-      {title:"FunTime1", time:"11:00AM- 12:00PM", info:"Come and have fun!", img:"holder.js/100px180"}
-    ] }
+      events:[] }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
     this.handleNext = this.handleNext.bind(this);
     this.perPage = 3;
   }
 
+  componentDidMount() {
+    console.log("location in recommend", this.props.location)
+    this.init();
+  }
   //When the user click the add bottom on the event, add this event to user's calender.
   handleSubmit(){
 
   }
 
+  init() {
+    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=[${this.props.pref[0]},${this.props.pref[1]},${this.props.pref[2]}]&latlong=${this.props.location[0]},${this.props.location[1]}&apikey=FbaXAVqFDDUUKd927p9yMFZHEbBB5v9J&page=${this.state.currPage}&size=3`)
+    .then(result => {
+      console.log("recoomedation result", result);
+      const newEvent = result.data._embedded.events.map((event) => {
+        return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info} 
+      })
+      this.setState((prevState)=>{return {events: newEvent}});
+    })
+  }
+
+
   //Prev Page, set the current page number to be the previous page
   handlePrev(){
     //decrease current page num
-    this.setState((prevState)=>{return {currPage: prevState.currPage - 1}});
+    const prevPage = this.state.currPage - 1;
+    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=[${this.props.pref[0]},${this.props.pref[1]},${this.props.pref[2]}]&latlong=${this.props.location[0]},${this.props.location[1]}&apikey=FbaXAVqFDDUUKd927p9yMFZHEbBB5v9J&page=${prevPage}&size=3`)
+    .then(result => {
+      console.log("recoomedation result", result);
+      const newEvent = result.data._embedded.events.map((event) => {
+        return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info} 
+      })
+      this.setState((prevState)=>{return {currPage: prevPage, events: newEvent}});
+    })
   }
 
   //load next page, get more recommendation.
   handleNext(){
     //increase current page num
-    this.setState((prevState)=>{return {currPage: prevState.currPage + 1}});
+    const nextPage = this.state.currPage + 1;
+    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=[${this.props.pref[0]},${this.props.pref[1]},${this.props.pref[2]}]&latlong=${this.props.location[0]},${this.props.location[1]}&apikey=FbaXAVqFDDUUKd927p9yMFZHEbBB5v9J&page=${nextPage}&size=3`)
+    .then(result => {
+      console.log("recoomedation result", result);
+      const newEvent = result.data._embedded.events.map((event) => {
+        return {title: event.name, distance: event.distance, time: event.dates.start.localDate + " " + event.dates.start.localTime, img: event.images[0].url, info: event.info} 
+      })
+      this.setState((prevState)=>{return {currPage: nextPage, events: newEvent}});
+    })
 
     //Get more recommendation.
   }
@@ -45,14 +71,22 @@ class Recommend extends Component {
   render() { 
     return ( 
       <div className = "recommend">
-        <Button variant="primary" size="lg" disabled={this.state.currPage === 0} onClick = {this.handlePrev}>
+        <style type="text/css">
+                {`
+                .btn-design {
+                  background-color: #ff6c00;
+                  color: white;
+                }
+                `}
+              </style>
+        <Button variant="design" size="lg" disabled={this.state.currPage === 0} onClick = {this.handlePrev}>
           PrevPage
         </Button>
         <div className="divider"/>
-        <Button variant="primary" size="lg" active onClick = {this.handleNext}>
+        <Button variant="design" size="lg" active onClick = {this.handleNext}>
           NextPage
         </Button>
-        {this.state.events.slice(this.state.currPage*this.perPage,(this.state.currPage+1)*this.perPage).map((p)=> (<Recomm title = {p.title} time = {p.time} info = {p.info} img = {p.info} add={this.handleSubmit}/>))}
+        {this.state.events.map((event)=> (<Recomm key={Math.random()} title = {event.title} time = {event.time} info = {event.info} img = {event.img} add={this.handleSubmit}/>))}
       </div>
     );
   }
