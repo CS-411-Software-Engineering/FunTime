@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Row, Col} from 'react-bootstrap';
-import { Container } from 'react-bootstrap';
+import {Row, Col, Container, Spinner} from 'react-bootstrap';
 import Calendar from './calendar.jsx';
 import Recommend from './recommend.jsx';
 import Search from './search.jsx';
@@ -18,21 +17,7 @@ class App extends Component {
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
-    this.geoLocationSuccess = this.geoLocationSuccess.bind(this);
     this.success = this.success.bind(this);
-  }
-
-  componentDidMount() {
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
-    
-    function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    }  
-      navigator.geolocation.getCurrentPosition(this.success, error, options);
   }
 
   success(pos) {
@@ -48,26 +33,33 @@ class App extends Component {
     this.setState({user: updatedUserInfo});
   }
 
-  geoLocationSuccess(location) {
-    console.log("Location:", location);
-    const updatedUserInfo = this.state.user;
-    updatedUserInfo.location = location
-    this.setState({ user: updatedUserInfo});
-  }
-
-
   logIn(data, user) {
     let events = data.events
     console.log('events:', events)
     console.log('user:', user);
-    axios.post(`/user/verify`, { ...user }).then((result) => {
+    axios.post(`/user/verify`, { ...user })
+    .then((result) => {
       console.log("RETRUN value from user email get:", result)
       if(result.data.first) {
         user.first = true;
       } else {
         user.first = false;
       }
-      this.setState({signedIn: true, events, user})
+      
+      this.setState({signedIn: true, events, user}, () => {
+
+        const options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+
+        function error(err) {
+          console.warn(`ERROR(${err.code}): ${err.message}`);
+        };
+
+        navigator.geolocation.getCurrentPosition(this.success, error, options);
+      })
     })
   }
 
@@ -88,7 +80,13 @@ class App extends Component {
           </header>
           <Row>
             <Col sm={8}><Calendar events = {this.state.events} /></Col>
-            <Col sm={4}><Recommend location = {this.state.user.location} /></Col>
+            {this.state.user.location 
+              ? <Col sm={4}><Recommend location = {this.state.user.location} /></Col>
+              : (<>
+                  <Spinner animation="grow" variant="success" />
+                  <Spinner animation="grow" variant="danger" />
+                  <Spinner animation="grow" variant="warning" />
+                </>)}
           </Row>
         </Container>
        )
