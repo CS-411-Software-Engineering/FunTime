@@ -6,11 +6,8 @@ import Recommend from './recommend.jsx';
 import Search from './search.jsx';
 import Navigation from './navigation.jsx';
 import Login from './login.jsx';
-<<<<<<< HEAD
 import PreferencesForm from './preferencesForm.jsx';
-=======
 import axios from 'axios';
->>>>>>> master
 
 class App extends Component {
   constructor(props) {
@@ -53,6 +50,7 @@ class App extends Component {
             <Row style={{marginTop: "50px", height: "100%"}}>
               <Col sm={8}><Search /></Col>
               <Col sm={4}><Navigation logOut={this.logOut} /></Col>
+              <PreferencesForm />
             </Row>
           </header>
           <Row>
@@ -60,7 +58,6 @@ class App extends Component {
             <Col sm={4}><Recommend /></Col>
           </Row>
 
-          <PreferencesForm />
 
         </Container>
        )

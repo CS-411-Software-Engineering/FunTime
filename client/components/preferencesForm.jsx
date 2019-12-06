@@ -3,6 +3,8 @@ import Select from 'react-select';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './preferencesForm.css'
 import Button from 'react-bootstrap/Button'
+import axios from 'axios'
+
 const sportsCategories = [
   { label: "Baksetball", value: 1 },
   { label: "Baseball", value: 2 },
@@ -30,16 +32,24 @@ class PreferencesForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userPreferences: null,
+      userPreferences: [],
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(runInThisContext)
   }
-  handleChange = userPreferences => {
-    this.setState(
-      { userPreferences },
-      () => console.log(`Option selected:`, this.state.userPreferences)
-    );
+
+  handleChange(event){
+    console.log(event[0].label)
+    this.setState((prevState)=>{
+      userPreferences: prevState.userPreferences.push(event[0].label)
+      console.log(this.state.userPreferences)
+    })
   };
+
+  handleSubmit(){
+    axios.put('/user/update',userPreferences).then((result)=> {
+    })
+  }
 
   render() {
     return (
@@ -74,11 +84,11 @@ class PreferencesForm extends Component {
       </div> */}
       <div className='PeferencesForm'>
         <h4>Choose Your Preference</h4>
-        <Select placeholder="sports" options={ sportsCategories } isMulti />
-        <Select placeholder="music" options={ musicCategories } isMulti />
-        <Select placeholder="outdoor" options={ outdoorActivities } isMulti />
+        <Select placeholder="sports" options={ sportsCategories } isMulti onChange={this.handleChange} />
+        <Select placeholder="music" options={ musicCategories } isMulti onChange={this.handleChange} />
+        <Select placeholder="outdoor" options={ outdoorActivities } isMulti onChange={this.handleChange} />
         <div className="PeferencesForm-buttom">
-          <Button variant="primary">Submit</Button>
+          <Button variant="primary" onSubmit={this.handleSubmit}>Submit</Button>
         </div>
       </div>
 
