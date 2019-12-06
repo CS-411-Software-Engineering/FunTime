@@ -27,6 +27,20 @@ const outdoorActivities = [
 ];
 
 class PreferencesForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userPreferences: null,
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleChange = userPreferences => {
+    this.setState(
+      { userPreferences },
+      () => console.log(`Option selected:`, this.state.userPreferences)
+    );
+  };
+
   render() {
     return (
       <div>
