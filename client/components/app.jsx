@@ -39,7 +39,7 @@ class App extends Component {
           <header>
             <Row style={{marginTop: "50px", height: "100%"}}>
               <Col sm={8}><Search /></Col>
-              <Col sm={4}><Navigation logOut={this.logOut} /></Col>
+              <Col sm={4}><Navigation logOut={this.logOut} user = {this.state.user} /></Col>
             </Row>
           </header>
           <Row>

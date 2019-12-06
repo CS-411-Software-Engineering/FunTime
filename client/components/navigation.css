@@ -1,0 +1,11 @@
+.modal-header {
+    color: #ff6c00;
+  }
+  /* .modal-body {
+    color: #ff6c00;
+  } */
+  .modal-body > .img-responsive {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
