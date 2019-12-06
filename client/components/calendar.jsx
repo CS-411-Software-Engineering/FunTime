@@ -60,13 +60,13 @@ class MyCalendar extends Component {
           size = 'sm'
 
         >
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title id="contained-modal-title-vcenter">
             Select your preferences
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <PreferencesForm hide = {this.onHide}/>
+          <PreferencesForm hide={this.onHide}/>
         </Modal.Body>
         <Modal.Footer>
           {/* <Button onClick={this.onHide}>Close</Button> */}
