@@ -7,9 +7,17 @@ import {
 require('react-big-calendar/lib/css/react-big-calendar.css');
 import './calendar.css'
 
-// import {Row, Col} from 'react-bootstrap';
+// Calendar weekly view start with today
+var d = new Date();
+var n = d.getDay();
+moment.locale('en',{
+  week:{
+    dow : n
+  }
+});
 
 const localizer = momentLocalizer(moment);
+
 
 class MyCalendar extends Component {
   constructor(props) {
@@ -27,7 +35,7 @@ class MyCalendar extends Component {
     this.setState({events});
   }
 
-
+  
 
 
   render() {
