@@ -35,7 +35,7 @@ class App extends Component {
           first:true
         })
       } else {
-        user.first = true;
+        user.first = false;
       }
       this.setState({signedIn: true, events, user})
     })
