@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 
 const sportsCategories = [
-  { label: "Baksetball", value: 1 },
+  { label: "Basketball", value: 1 },
   { label: "Baseball", value: 2 },
   { label: "Hockey", value: 3 },
   { label: "Soccer", value: 4 },
