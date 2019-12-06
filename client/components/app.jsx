@@ -16,6 +16,7 @@ class App extends Component {
       signedIn: false,
       events: [],
       user: {},
+      first: null
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -30,6 +31,9 @@ class App extends Component {
       console.log("RETRUN value from user email get:", result)
       if(result.data.first) {
         user.first = true;
+        this.setState(()=>{
+          first:true
+        })
       } else {
         user.first = false;
       }
@@ -46,7 +50,7 @@ class App extends Component {
     {return this.state.signedIn
       ? (
         <Container>
-          <PreferencesForm />
+          {this.state.first == true? <PreferencesForm /> : null}
           <header>
             <Row style={{marginTop: "50px", height: "100%"}}>
               <Col sm={8}><Search /></Col>
@@ -58,7 +62,7 @@ class App extends Component {
             <Col sm={4}><Recommend /></Col>
           </Row>
 
-        {/* {user.first == true? <PreferencesForm /> : null} */}
+      
 
         </Container>
        )
