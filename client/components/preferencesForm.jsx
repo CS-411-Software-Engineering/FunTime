@@ -59,10 +59,13 @@ class PreferencesForm extends Component {
         </div>
       </div> */}
       <div className='PeferencesForm'>
+        <h4>Choose Your Preference</h4>
         <Select placeholder="sports" options={ sportsCategories } isMulti />
         <Select placeholder="music" options={ musicCategories } isMulti />
         <Select placeholder="outdoor" options={ outdoorActivities } isMulti />
-        <Button variant="primary">Submit</Button>
+        <div className="PeferencesForm-buttom">
+          <Button variant="primary">Submit</Button>
+        </div>
       </div>
 
     </div>
