@@ -35,20 +35,20 @@ class PreferencesForm extends Component {
       userPreferences: [],
     }
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(runInThisContext)
+    // this.handleSubmit = this.handleSubmit.bind(runInThisContext)
   }
 
   handleChange(event){
-    console.log(event[0].label)
+    console.log(event)
     this.setState((prevState)=>{
-      userPreferences: prevState.userPreferences.push(event[0].label)
+      userPreferences: prevState.userPreferences.push(event[event.length-1].label)
       console.log(this.state.userPreferences)
     })
   };
 
   handleSubmit(){
-    axios.put('/user/update',userPreferences).then((result)=> {
-    })
+    // axios.put('/user/update',userPreferences).then((result)=> {
+    // })
   }
 
   render() {
