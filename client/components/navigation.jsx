@@ -67,7 +67,7 @@ class Navigation extends Component {
             {/* <div className="divider"/> */}
 
             {/* <Nav.Item> */}
-              <p>Welcome to FunTime!</p>
+              <p className = "welcome">Welcome to FunTime!</p>
             {/* </Nav.Item> */}
           </Nav>
         </Navbar>

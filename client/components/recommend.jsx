@@ -79,11 +79,11 @@ class Recommend extends Component {
                 }
                 `}
               </style>
-        <Button variant="primary" size="lg" disabled={this.state.currPage === 0} onClick = {this.handlePrev}>
+        <Button variant="design" size="lg" disabled={this.state.currPage === 0} onClick = {this.handlePrev}>
           PrevPage
         </Button>
         <div className="divider"/>
-        <Button variant="primary" size="lg" active onClick = {this.handleNext}>
+        <Button variant="design" size="lg" active onClick = {this.handleNext}>
           NextPage
         </Button>
         {this.state.events.map((event)=> (<Recomm key={Math.random()} title = {event.title} time = {event.time} info = {event.info} img = {event.img} add={this.handleSubmit}/>))}

@@ -13,7 +13,15 @@ class Recomm extends Component{
                     <Card.Text>
                         {this.props.info}
                     </Card.Text>
-                    <Button variant="primary" onClick = {this.props.add}>Add to Schedule</Button>
+                    <style type="text/css">
+                        {`
+                        .btn-design {
+                        background-color: #ff6c00;
+                        color: white;
+                        }
+                        `}
+                    </style>
+                    <Button variant="design" onClick = {this.props.add}>Add to Schedule</Button>
                 </Card.Body>
             </Card>
         );
