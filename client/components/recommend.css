@@ -1,0 +1,15 @@
+.recommend{
+    overflow: 'scroll';
+    display: 'block';
+    width:'inherit';
+    margin-left: 10%;
+    margin-top: 5%;
+    align-content: center;
+    max-height: 20px;
+}
+
+.divider{
+  width:40px;
+  height:auto;
+  display:inline-block;
+}

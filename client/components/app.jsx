@@ -6,7 +6,11 @@ import Recommend from './recommend.jsx';
 import Search from './search.jsx';
 import Navigation from './navigation.jsx';
 import Login from './login.jsx';
+<<<<<<< HEAD
 import PreferencesForm from './preferencesForm.jsx';
+=======
+import axios from 'axios';
+>>>>>>> master
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +29,15 @@ class App extends Component {
     let events = data.events
     console.log('events:', events)
     console.log('user:', user);
-    this.setState({signedIn: true, events, user})
+    axios.post(`/user/verify`, { ...user }).then((result) => {
+      console.log("RETRUN value from user email get:", result)
+      if(result.data.first) {
+        user.first = true;
+      } else {
+        user.first = false;
+      }
+      this.setState({signedIn: true, events, user})
+    })
   }
 
   logOut() {
