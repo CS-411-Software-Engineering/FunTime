@@ -35,8 +35,6 @@ class App extends Component {
           first:true
         })
       } else {
-        // user.first = false;
-        console.log(user.first)
         user.first = true;
       }
       this.setState({signedIn: true, events, user})
@@ -47,12 +45,9 @@ class App extends Component {
     this.setState({signedIn: false})
   }
 
-
   render() {
     {return this.state.signedIn
-      ? (this.state.first 
-        ? <PreferencesForm /> 
-          : <Container>
+      ? (<Container>
               <header>
                 <Row style={{marginTop: "50px", height: "100%"}}>
                   <Col sm={8}><Search /></Col>
@@ -60,11 +55,11 @@ class App extends Component {
                 </Row>
               </header>
               <Row>
-                <Col sm={8}><Calendar events = {this.state.events} /></Col>
+                <Col sm={8}><Calendar events = {this.state.events} user = {this.state.user}/></Col>
                 <Col sm={4}><Recommend /></Col>
               </Row>
             </Container>
-        ) 
+        )
       : <Login logIn = { this.logIn } logOut = { this.logOut } />
     }
   }
