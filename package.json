@@ -48,6 +48,7 @@
     "webpack-cli": "^3.3.9"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
     "file-loader": "^4.2.0",
