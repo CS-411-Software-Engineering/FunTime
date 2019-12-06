@@ -6,6 +6,7 @@ import Recommend from './recommend.jsx';
 import Search from './search.jsx';
 import Navigation from './navigation.jsx';
 import Login from './login.jsx';
+import axios from 'axios';
 
 class App extends Component {
   constructor(props) {
