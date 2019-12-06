@@ -1,0 +1,50 @@
+{
+  "name": "funtime",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "setup": "npm install && cd ./client && npm install && cd ../server && npm install",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./server/index.js",
+    "client-dev": "webpack -d --watch",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS-411-Software-Engineering/FunTime.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CS-411-Software-Engineering/FunTime/issues"
+  },
+  "homepage": "https://github.com/CS-411-Software-Engineering/FunTime#readme",
+  "dependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "axios": "^0.19.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.13",
+    "nodemon": "^1.19.4",
+    "react": "^16.11.0",
+    "react-big-calendar": "^0.22.1",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-dom": "^16.11.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
+  },
+  "devDependencies": {
+    "file-loader": "^4.2.0",
+    "image-webpack-loader": "^6.0.0"
+  }
+}
