@@ -49,7 +49,6 @@ class MyCalendar extends Component {
           events={this.state.events}
           defaultView='week'
           views = {['week']}
-
           />
         <Modal
           show={this.state.showModal}
@@ -57,6 +56,8 @@ class MyCalendar extends Component {
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
+          size = 'sm'
+
         >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -71,16 +72,6 @@ class MyCalendar extends Component {
         </Modal.Footer>
       </Modal>
       </div>
-
-      // <div style={{border: "1px solid black"}}>
-      //   {this.props.events.map((event, index) => {
-      //     return <div key = {index}>
-      //       <h1>{event.summary}</h1>
-      //       <h2>{event.start.dateTime}</h2>
-      //       <h2>{event.end.dateTime}</h2>
-      //     </div>
-      //   })}
-      // </div>
      );
   }
 }
