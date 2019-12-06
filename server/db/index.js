@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   pref: Array,
-  location: String
+  location: Array
 })
 
 const User = mongoose.model('User', userSchema);
