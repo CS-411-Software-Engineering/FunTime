@@ -57,15 +57,7 @@ class Login extends Component {
         email: profile.getEmail()
       }
       console.log('user in login:', user)
-      axios.get(`/user/${user.email}`).then((result) => {
-        if(result.data.found) {
-          user.first = true;
-          logIn({ events }, user)
-        } else {
-          user.first = false;
-          logIn({ events }, user)
-        }
-      })
+      logIn({ events }, user)
 
     });
   }

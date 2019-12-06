@@ -13,8 +13,7 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   pref: Array,
-  location: String,
-  Age: Number,
+  location: String
 })
 
 const User = mongoose.model('User', userSchema);
@@ -35,7 +34,7 @@ const findUserByEmail = (email) => {
 
 const createUser = (user) => {
   return new Promise((res, rej)=> {
-    User.create({name: user.displayName, email: user.emails, pref: [], location: user.location})
+    User.create({name: user.name, email: user.email, pref: [], location: user.location})
     .then((createdUser)=> {
       res(createdUser)
     })
@@ -46,10 +45,17 @@ const createUser = (user) => {
   })
 }
 
-const updateUserPref = (email, pref) => {
+const updateUserPref = (email = "", pref = []) => {
   return new Promise((res, rej) => {
-    User.findOneAndUpdate
+    User.findOneAndUpdate({ email }, { pref }, (err, result) => {
+      if(err) {
+        console.log("Updating User Pref Error:", err);
+        rej(err);
+      } else {
+        res(result);
+      }
+    })
   })
 }
 
-module.exports = { findUserByEmail, createUser };
+module.exports = { findUserByEmail, createUser, updateUserPref };
