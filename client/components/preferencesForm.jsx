@@ -35,7 +35,7 @@ class PreferencesForm extends Component {
       userPreferences: [],
     }
     this.handleChange = this.handleChange.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(runInThisContext)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event){
@@ -49,6 +49,11 @@ class PreferencesForm extends Component {
   handleSubmit(){
     // axios.put('/user/update',userPreferences).then((result)=> {
     // })
+    
+
+
+    console.log("submit triggered")
+    this.props.hide()
   }
 
   render() {
@@ -88,7 +93,7 @@ class PreferencesForm extends Component {
         <Select placeholder="music" options={ musicCategories } isMulti onChange={this.handleChange} />
         <Select placeholder="outdoor" options={ outdoorActivities } isMulti onChange={this.handleChange} />
         <div className="PeferencesForm-buttom">
-          <Button variant="primary" onSubmit={this.handleSubmit}>Submit</Button>
+          <Button variant="primary" onClick={this.handleSubmit}>Submit</Button>
         </div>
       </div>
 

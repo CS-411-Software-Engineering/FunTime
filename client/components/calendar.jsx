@@ -36,6 +36,7 @@ class MyCalendar extends Component {
   }
 
   onHide() {
+    console.log("triggered")
     this.setState({showModal: false});
   }
 
@@ -65,10 +66,10 @@ class MyCalendar extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <PreferencesForm />
+          <PreferencesForm hide = {this.onHide}/>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.onHide}>Close</Button>
+          {/* <Button onClick={this.onHide}>Close</Button> */}
         </Modal.Footer>
       </Modal>
       </div>
