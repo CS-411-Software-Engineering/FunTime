@@ -58,18 +58,7 @@ class Login extends Component {
       }
       console.log('user in login:', user)
       logIn({ events }, user)
-      // if (events.length > 0) {
-      //   for (let i = 0; i < events.length; i++) {
-      //     var event = events[i];
-      //     var when = event.start.dateTime;
-      //     if (!when) {
-      //       when = event.start.date;
-      //     }
-      //     appendPre(event.summary + ' (' + when + ')')
-      //   }
-      // } else {
-      //   appendPre('No upcoming events found.');
-      // }
+
     });
   }
   
