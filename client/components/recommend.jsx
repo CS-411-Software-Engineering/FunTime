@@ -45,6 +45,14 @@ class Recommend extends Component {
   render() { 
     return ( 
       <div className = "recommend">
+        <style type="text/css">
+                {`
+                .btn-design {
+                  background-color: #ff6c00;
+                  color: white;
+                }
+                `}
+              </style>
         <Button variant="primary" size="lg" disabled={this.state.currPage === 0} onClick = {this.handlePrev}>
           PrevPage
         </Button>

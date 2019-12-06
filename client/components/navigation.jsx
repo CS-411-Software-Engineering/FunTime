@@ -44,15 +44,10 @@ class Navigation extends Component {
     return ( 
       <div>
         <Navbar>
-          {/*<style type="text/css">
-            {`
-            .nav-link.active {
-              background-color: #ff6c00;
-              color: white;
-            }
-            `}
-          </style>*/}
           <Nav defaultActiveKey="/home">
+            <Nav.Item>
+              <Nav.Link href="/home">    </Nav.Link>
+            </Nav.Item>
             <Nav.Item>
             <style type="text/css">
                 {`
@@ -62,25 +57,18 @@ class Navigation extends Component {
                 }
                 `}
               </style>
-              <Button variant="design" onClick={this.handleShow}>
-                Profile
-              </Button>
+              <Button variant="design" onClick={this.handleShow}> Profile </Button> 
             </Nav.Item>
+            
+
             <Nav.Item>
-              <Nav.Link href="/home">Active</Nav.Link>
-              {/*<Nav.Link href="/home">Active</Nav.Link>*/}
+              <Nav.Link href="/home">              </Nav.Link>
             </Nav.Item>
-            <Nav.Item>
-              <style type="text/css">
-                {`
-                .btn-design {
-                  background-color: #ff6c00;
-                  color: white;
-                }
-                `}
-              </style>
-              <Button variant = "design" id="signout_button" onClick= {this.handleSignoutClick}>Sign Out</Button>
-            </Nav.Item>
+            {/* <div className="divider"/> */}
+
+            {/* <Nav.Item> */}
+              <p>Welcome to FunTime!</p>
+            {/* </Nav.Item> */}
           </Nav>
         </Navbar>
         <Modal show={this.state.setShow} onHide={this.handleClose}>
@@ -99,9 +87,7 @@ class Navigation extends Component {
             <Button variant="design" onClick={this.handleClose}>
               Close
             </Button>
-            {/* <Button variant="design" onClick={this.handleClose}>
-              Save Changes
-            </Button> */}
+            <Button variant = "design" id="signout_button" onClick= {this.handleSignoutClick}>Sign Out</Button>
           </Modal.Footer>
         </Modal>
       </div>
