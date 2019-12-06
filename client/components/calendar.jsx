@@ -17,7 +17,7 @@ class MyCalendar extends Component {
   constructor(props) {
     super(props);
     this.state = {events:[], showModal: false  };
-    this.onHide = this.onHide.bind(this);
+    this.hidePrefModal = this.hidePrefModal.bind(this);
   }
 
   componentDidMount () {
@@ -35,8 +35,7 @@ class MyCalendar extends Component {
     }
   }
 
-  onHide() {
-    console.log("triggered")
+  hidePrefModal() {
     this.setState({showModal: false});
   }
 
@@ -66,10 +65,10 @@ class MyCalendar extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <PreferencesForm hide={this.onHide}/>
+          <PreferencesForm hidePrefModal = {this.hidePrefModal} email = { this.props.user.email }/>
         </Modal.Body>
         <Modal.Footer>
-          {/* <Button onClick={this.onHide}>Close</Button> */}
+          <Button onClick={this.hidePrefModal}>Close</Button>
         </Modal.Footer>
       </Modal>
       </div>

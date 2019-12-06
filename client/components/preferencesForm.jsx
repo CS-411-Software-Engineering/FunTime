@@ -47,46 +47,16 @@ class PreferencesForm extends Component {
   };
 
   handleSubmit(){
-    // axios.put('/user/update',userPreferences).then((result)=> {
-    // })
-    
-
-
-    console.log("submit triggered")
-    this.props.hide()
+    console.log('hi!');
+    axios.put('/user/update', {pref: this.state.userPreferences, email: this.props.email})
+    .then((result)=> {
+      this.props.hidePrefModal();
+    })
   }
 
   render() {
     return (
       <div>
-        {/* <div>
-        <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-4">
-
-            <Select placeholder="sports" options={ sportsCategories } isMulti />
-          </div>
-          <div className="col-md-4"></div>
-        </div>
-      </div>
-      <div>
-        <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-4">
-            <Select placeholder="music" options={ musicCategories } isMulti />
-          </div>
-          <div className="col-md-4"></div>
-        </div>
-      </div>
-      <div>
-        <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-4">
-            <Select placeholder="outdoor" options={ outdoorActivities } isMulti />
-          </div>
-          <div className="col-md-4"></div>
-        </div>
-      </div> */}
       <div className='PeferencesForm'>
         <h4>Choose Your Preference</h4>
         <Select placeholder="sports" options={ sportsCategories } isMulti onChange={this.handleChange} />
@@ -96,7 +66,6 @@ class PreferencesForm extends Component {
           <Button variant="primary" onClick={this.handleSubmit}>Submit</Button>
         </div>
       </div>
-
     </div>
     );
   }

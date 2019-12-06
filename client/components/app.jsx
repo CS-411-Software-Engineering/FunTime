@@ -20,7 +20,7 @@ class App extends Component {
     }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
-
+    this.updateUserPref = this.updateUserPref.bind(this);
   }
 
   logIn(data, user) {
@@ -31,18 +31,27 @@ class App extends Component {
       console.log("RETRUN value from user email get:", result)
       if(result.data.first) {
         user.first = true;
-        this.setState(()=>{
-          first:true
-        })
       } else {
-        user.first = true;
+        user.first = false;
+        
       }
-      this.setState({signedIn: true, events, user})
+      axios.get(`/user/preference/${user.email}`)
+        .then((preferences) => {
+          console.log("PREFERENCES:", preferences);
+          user.pref = preferences.data.pref;
+          this.setState({signedIn: true, events, user})
+        })
     })
   }
 
   logOut() {
     this.setState({signedIn: false})
+  }
+
+  updateUserPref(pref = []) {
+    const updatedUser = this.state.user;
+    updatedUser.pref = pref;
+    this.setState({user: updatedUser});
   }
 
   render() {
@@ -55,7 +64,7 @@ class App extends Component {
                 </Row>
               </header>
               <Row>
-                <Col sm={8}><Calendar events = {this.state.events} user = {this.state.user}/></Col>
+                <Col sm={8}><Calendar events = {this.state.events} user = {this.state.user} updateUserPref = {this.updateUserPref} /></Col>
                 <Col sm={4}><Recommend /></Col>
               </Row>
             </Container>

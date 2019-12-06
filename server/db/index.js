@@ -47,7 +47,7 @@ const createUser = (user) => {
 
 const updateUserPref = (email = "", pref = []) => {
   return new Promise((res, rej) => {
-    User.findOneAndUpdate({ email }, { pref }, (err, result) => {
+    User.updateMany({ email }, { pref }, (err, result) => {
       if(err) {
         console.log("Updating User Pref Error:", err);
         rej(err);

@@ -21,6 +21,23 @@ router.post('/verify', (req, res, next) => {
     }
   })
 
+});
+
+router.get('/preference/:email', (req,res,next) => {
+  const { email } = req.params;
+  console.log(email);
+  db.findUserByEmail(email).then((result)=> {
+    res.send({ pref: result.pref })
+  })
+})
+
+router.put('/update', (req, res, next) => {
+  const { pref, email } = req.body;
+  console.log("pref, email:", pref, email);
+  db.updateUserPref(email, pref).then((result) => {
+    console.log("result after update pref: ", result)
+    res.send();
+  })
 })
 
 module.exports = router;
